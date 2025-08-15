@@ -1,0 +1,20 @@
+    /*
+    ==============================================================
+    Clase personalizada .clip-punta
+    --------------------------------------------------------------
+    - No pertenece a Tailwind; es CSS puro añadido para crear un
+      recorte (clip-path) con forma de polígono.
+    - Se aplica al contenedor de la imagen izquierda para "recortar"
+      su borde derecho con una punta que rompe la línea recta.
+    - Coordenadas del polígono (en % del ancho/alto del elemento):
+        (0 0)       -> esquina superior izquierda
+        (100% 0)    -> esquina superior derecha
+        (85% 50%)   -> punto medio hacia adentro que crea la punta
+        (100% 100%) -> esquina inferior derecha
+        (0 100%)    -> esquina inferior izquierda
+    - Puedes ajustar "85% 50%" para variar el ángulo/longitud de la punta.
+    ==============================================================
+    */
+    .clip-punta {
+      clip-path: polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%);
+    }
