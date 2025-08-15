@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
-</head>
-
-<body>
+<div id="modalEmail" clas>
+    <button onclick="document.getElementById('modalEmail').classList.add('hidden')"
+        class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">X</button>
     <form class="bg-white p-6 rounded shadow max-w-md mx-auto" action="" method="POST">
         <h2 class="text-xl font-bold mb-4">Enviar Email</h2>
         <div class="mb-3">
@@ -26,13 +18,11 @@
         <div class="mb-4">
             <label class="block text-sm font-medium mb-1">Mensaje</label>
             <textarea name="mensaje" rows="4" class="border rounded px-2 py-1 w-full" required></textarea>
-        </div>
-        <button type="submit" name="enviar"
-            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Enviar</button><br><br>
-        <div>
-            <a href="../index.html" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Salir</a>
-        </div>
+            <div>
+                <button type="submit" name="enviar"
+                    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Enviar</button>
+                <button type="button" onclick="document.getElementById('modalEmail').classList.add('hidden')"
+                    class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Cancelar</button>
+            </div>
     </form>
-</body>
-
-</html>
+</div>
