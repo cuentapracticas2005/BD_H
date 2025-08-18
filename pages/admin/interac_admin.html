@@ -6,32 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="bg-gray-50 p-8">
-    <!-- Barra de navegación -->
+
+    <!--Barra de Navegación-->
     <nav class="bg-white shadow-lg mb-8">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex space-x-7">
                     <div class="flex items-center">
-                        <img src="../src/img/HIDROSTAL3.png" alt="Logo" class="h-8 w-auto">
+                        <a href="../admin/interac_admin.html"><img src="../../public/img/HIDROSTAL3.png" alt="Logo"
+                                class="h-8 w-auto"></a>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <a href="interac_admin.html"
+                        <a href="./interac_admin.html"
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Inicio</a>
-                        <a href="historial.html"
-                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Historial</a>
-                        <a href="crear_usuario.html"
-                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Crear
-                            Usuario</a>
-                        <a href="admin_usuarios.html"
+
+                        <div>
+                            <button class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600"
+                                onclick="document.getElementById('modalCreateUser').classList.remove('hidden')">
+                                Crear Nuevo Usuario
+                            </button>
+                        </div>
+                        <a href="../dashboard/admin_user.html"
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Administración
                             de Usuarios</a>
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <a href="../index.html"
+                    <a href="../../public/index.html"
                         class="px-4 py-2 rounded text-sm font-medium text-white bg-red-600 hover:bg-red-700">
                         Cerrar Sesión
                     </a>
@@ -193,6 +198,9 @@
         <!-- Insercion del modal -->
         <div id="modalContainer"></div>
         <div id="modalContainerEliminar"></div>
-        <script src="../modals/modal_agregar_archivo/m_agregar_archivo.js"></script>
-        <script src="../modals/modal_eliminar_archivo/m_eliminar_archivo.js"></script>
+        <div id="modalContainerCrear"></div>
+        <script src="../../src/components/modal_agregar_archivo/m_agregar_archivo.js"></script>
+        <script src="../../src/components/modal_eliminar_archivo/m_eliminar_archivo.js"></script>
+        <script src="../../src/components/modal_create_user/m_create_user.js"></script>
+
     </div>
