@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
-</head>
-
-<body class="bg-gray-50 p-8">
+barraNav.innerHTML = `
     <nav class="bg-white shadow-lg mb-8">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex space-x-7">
                     <div class="flex items-center">
-                        <img src="../../src/img/HIDROSTAL3.png" alt="Logo" class="h-8 w-auto">
+                        <img src="../src/img/HIDROSTAL3.png" alt="Logo" class="h-8 w-auto">
                     </div>
                     <div class="flex items-center space-x-4">
                         <a href="interac_admin.html"
@@ -30,7 +20,7 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <a href="../../index.html"
+                    <a href="../index.html"
                         class="px-4 py-2 rounded text-sm font-medium text-white bg-red-600 hover:bg-red-700">
                         Cerrar Sesión
                     </a>
@@ -38,6 +28,4 @@
             </div>
         </div>
     </nav>
-</body>
-
-</html>
+`;
