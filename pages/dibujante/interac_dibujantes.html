@@ -9,13 +9,39 @@
 </head>
 
 <body class="bg-gray-50 p-8">
-
     <!--Barra de Navegación-->
-    <div>
-        <div id="barraNavAdmin" class="row"></div>
-    </div>
-
+    <nav class="bg-white shadow-lg mb-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex space-x-7">
+                    <div class="flex items-center">
+                        <a href="../admin/interac_admin.html"><img src="../../public/img/HIDROSTAL3.png" alt="Logo"
+                                class="h-8 w-auto"></a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="./interac_dibujantes.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Inicio</a>
+                        <a href="../dibujante/historial_dibujante.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Historial</a>
+                        <a href="../dashboard/create_user.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Crear
+                            Usuario</a>
+                        <a href="../dashboard/admin_user.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Administración
+                            de Usuarios</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="../index.html"
+                        class="px-4 py-2 rounded text-sm font-medium text-white bg-red-600 hover:bg-red-700">
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="max-w-7x2 mx-auto">
+
         <div>
             <label class="block text-sm font-medium mb-1">SELECCIONE EL TIPO DE DOCUMENTO A BUSCAR: </label>
             <select name="tipo_documento" class="border rounded px-2 py-1 w-32" required>
@@ -122,7 +148,6 @@
                         <th class="px-4 py-2">Dibujado en</th>
                         <th class="px-4 py-2">Ver PDF</th>
                         <th class="px-4 py-2">Descargar PDF</th>
-                        <th class="px-4 py-2">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -141,12 +166,6 @@
                         <td class="border px-4 py-2 text-center">
                             <a href="docs/ejemplo1.pdf" download class="text-green-600 underline">Descargar</a>
                         </td>
-                        <td class="border px-4 py-2 text-center">
-                            <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
-                                onclick="document.getElementById('modalEliminar').classList.remove('hidden')">
-                                Eliminar
-                            </button>
-                        </td>
                     </tr>
                     <tr>
                         <td class="border px-4 py-2">2021</td>
@@ -163,9 +182,6 @@
                         <td class="border px-4 py-2 text-center">
                             <a href="docs/ejemplo2.pdf" download class="text-green-600 underline">Descargar</a>
                         </td>
-                        <td class="border px-4 py-2 text-center">
-                            <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700">Eliminar</button>
-                        </td>
                     </tr>
                     <!-- Puedes agregar más filas aquí -->
                 </tbody>
@@ -174,10 +190,6 @@
         <br>
         <!-- Insercion del modal -->
         <div id="modalContainer"></div>
-        <div id="modalContainerEliminar"></div>
         <script src="../modals/modal_agregar_archivo/m_agregar_archivo.js"></script>
-        <script src="../modals/modal_eliminar_archivo/m_eliminar_archivo.js"></script>
 
-        <!-- Barra de Navegación -->
-        <script src="./extraction/barra_nav.js"></script>
     </div>

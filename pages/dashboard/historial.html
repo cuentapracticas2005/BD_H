@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Actividades</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 p-8">
+    <!--Barra de Navegación-->
+    <nav class="bg-white shadow-lg mb-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex space-x-7">
+                    <div class="flex items-center">
+                        <a href="../admin/interac_admin.html"><img src="../../public/img/HIDROSTAL3.png" alt="Logo"
+                                class="h-8 w-auto"></a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="../admin/interac_admin.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Inicio</a>
+
+                        <div>
+                            <button class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600"
+                                onclick="document.getElementById('modalCreateUser').classList.remove('hidden')">
+                                Crear Nuevo Usuario
+                            </button>
+                        </div>
+
+                        <a href="./historial.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Historial</a>
+
+                        <a href="./admin_user.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Administración
+                            de Usuarios</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="../../public/index.html"
+                        class="px-4 py-2 rounded text-sm font-medium text-white bg-red-600 hover:bg-red-700">
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Historial de Actividades</h1>
+
+        <!-- Filtros -->
+        <form class="bg-white p-6 rounded shadow mb-8 flex flex-wrap gap-4 items-end">
+            <div>
+                <label class="block text-sm font-medium mb-1">Fecha Desde</label>
+                <input type="date" name="fecha_desde" class="border rounded px-2 py-1 w-40">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Fecha Hasta</label>
+                <input type="date" name="fecha_hasta" class="border rounded px-2 py-1 w-40">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Tipo de Acción</label>
+                <select name="tipo_accion" class="border rounded px-2 py-1 w-40">
+                    <option value="">Todas</option>
+                    <option value="agregar">Agregar</option>
+                    <option value="eliminar">Eliminar</option>
+                    <option value="modificar">Modificar</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Usuario</label>
+                <input type="text" name="usuario" class="border rounded px-2 py-1 w-40" placeholder="Nombre de usuario">
+            </div>
+            <div class="flex gap-2">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Buscar</button>
+                <button type="reset"
+                    class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Limpiar</button>
+            </div>
+        </form>
+
+        <!-- Tabla de historial -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded shadow">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-700">
+                        <th class="px-4 py-2">Fecha</th>
+                        <th class="px-4 py-2">Hora</th>
+                        <th class="px-4 py-2">Usuario</th>
+                        <th class="px-4 py-2">Acción</th>
+                        <th class="px-4 py-2">Detalle</th>
+                        <th class="px-4 py-2">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Ejemplo de registro de agregar archivo -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="border px-4 py-2">18/08/2023</td>
+                        <td class="border px-4 py-2">09:30</td>
+                        <td class="border px-4 py-2">Juan Pérez</td>
+                        <td class="border px-4 py-2">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">Agregar</span>
+                        </td>
+                        <td class="border px-4 py-2">Agregó plano "P-12345 - Bomba Hidráulica"</td>
+                        <td class="border px-4 py-2">
+                            <span class="text-green-600">✓ Completado</span>
+                        </td>
+                    </tr>
+                    <!-- Ejemplo de registro de eliminar archivo -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="border px-4 py-2">18/08/2023</td>
+                        <td class="border px-4 py-2">10:15</td>
+                        <td class="border px-4 py-2">Ana Gómez</td>
+                        <td class="border px-4 py-2">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm">Eliminar</span>
+                        </td>
+                        <td class="border px-4 py-2">Eliminó plano "P-67890 - Componente XYZ"</td>
+                        <td class="border px-4 py-2">
+                            <span class="text-red-600">✓ Completado</span>
+                        </td>
+                    </tr>
+                    <!-- Ejemplo de registro de modificación -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="border px-4 py-2">18/08/2023</td>
+                        <td class="border px-4 py-2">11:45</td>
+                        <td class="border px-4 py-2">Carlos López</td>
+                        <td class="border px-4 py-2">
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-sm">Modificar</span>
+                        </td>
+                        <td class="border px-4 py-2">Actualizó versión del plano "P-13579"</td>
+                        <td class="border px-4 py-2">
+                            <span class="text-blue-600">✓ Completado</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Paginación -->
+        <div class="mt-4 flex justify-center">
+            <nav class="flex items-center gap-2">
+                <button class="px-3 py-1 rounded border hover:bg-gray-100">Anterior</button>
+                <button class="px-3 py-1 rounded bg-blue-600 text-white">1</button>
+                <button class="px-3 py-1 rounded border hover:bg-gray-100">2</button>
+                <button class="px-3 py-1 rounded border hover:bg-gray-100">3</button>
+                <button class="px-3 py-1 rounded border hover:bg-gray-100">Siguiente</button>
+            </nav>
+        </div>
+    </div>
+
+    <div id="modalContainerCrear"></div>
+    <!-- Scripts -->
+    <script src="../../src/components/modal_create_user/m_create_user.js"></script>
+</body>
+
+</html>

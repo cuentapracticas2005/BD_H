@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Usuarios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 p-8">
+    <!--Barra de Navegación-->
+    <nav class="bg-white shadow-lg mb-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex space-x-7">
+                    <div class="flex items-center">
+                        <a href="../admin/interac_admin.html"><img src="../../public/img/HIDROSTAL3.png" alt="Logo"
+                                class="h-8 w-auto"></a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="../admin/interac_admin.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Inicio</a>
+                            
+                        <div>
+                            <button class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600"
+                                onclick="document.getElementById('modalCreateUser').classList.remove('hidden')">
+                                Crear Nuevo Usuario
+                            </button>
+                        </div>
+
+                        <a href="./admin_user.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Administración
+                            de Usuarios</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="../../public/index.html"
+                        class="px-4 py-2 rounded text-sm font-medium text-white bg-red-600 hover:bg-red-700">
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Administración de Usuarios</h1>
+
+        <!-- Filtros de búsqueda -->
+        <form class="bg-white p-6 rounded shadow mb-8 flex flex-wrap gap-4 items-end">
+            <div>
+                <label class="block text-sm font-medium mb-1">Buscar por nombre</label>
+                <input type="text" name="nombre" class="border rounded px-3 py-2 w-48" placeholder="Nombre del usuario">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Rol</label>
+                <select name="rol" class="border rounded px-3 py-2 w-40">
+                    <option value="">Todos</option>
+                    <option value="admin">Administrador</option>
+                    <option value="dibujante">Dibujante</option>
+                    <option value="supervisor">Supervisor</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Estado</label>
+                <select name="estado" class="border rounded px-3 py-2 w-40">
+                    <option value="">Todos</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+            </div>
+            <div class="flex gap-2">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Buscar
+                </button>
+                <button type="reset" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">
+                    Limpiar
+                </button>
+            </div>
+        </form>
+
+        <!-- Tabla de usuarios -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded shadow">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-700">
+                        <th class="px-4 py-2">Nombre</th>
+                        <th class="px-4 py-2">Apellidos</th>
+                        <th class="px-4 py-2">Email</th>
+                        <th class="px-4 py-2">DNI</th>
+                        <th class="px-4 py-2">Rol</th>
+                        <th class="px-4 py-2">Estado</th>
+                        <th class="px-4 py-2">Última conexión</th>
+                        <th class="px-4 py-2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Ejemplo de usuario -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="border px-4 py-2">Juan</td>
+                        <td class="border px-4 py-2">Pérez García</td>
+                        <td class="border px-4 py-2">juan.perez@hidrostal.com.pe</td>
+                        <td class="border px-4 py-2">45678912</td>
+                        <td class="border px-4 py-2">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">
+                                Dibujante
+                            </span>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">
+                                Activo
+                            </span>
+                        </td>
+                        <td class="border px-4 py-2">2023-08-17 15:30</td>
+                        <td class="border px-4 py-2">
+                            <div class="flex gap-2 justify-center">
+                                <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
+                                    Editar
+                                </button>
+                                <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+                                    Desactivar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Ejemplo de usuario inactivo -->
+                    <tr class="hover:bg-gray-50">
+                        <td class="border px-4 py-2">Ana</td>
+                        <td class="border px-4 py-2">Gómez Ruiz</td>
+                        <td class="border px-4 py-2">ana.gomez@hidrostal.com.pe</td>
+                        <td class="border px-4 py-2">42156789</td>
+                        <td class="border px-4 py-2">
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-sm">
+                                Supervisor
+                            </span>
+                        </td>
+                        <td class="border px-4 py-2">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm">
+                                Inactivo
+                            </span>
+                        </td>
+                        <td class="border px-4 py-2">2023-08-15 09:45</td>
+                        <td class="border px-4 py-2">
+                            <div class="flex gap-2 justify-center">
+                                <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
+                                    Editar
+                                </button>
+                                <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+                                    Activar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Paginación -->
+        <div class="mt-4 flex justify-center">
+            <nav class="flex items-center gap-2">
+                <button class="px-3 py-1 rounded border hover:bg-gray-100">Anterior</button>
+                <button class="px-3 py-1 rounded bg-blue-600 text-white">1</button>
+                <button class="px-3 py-1 rounded border hover:bg-gray-100">2</button>
+                <button class="px-3 py-1 rounded border hover:bg-gray-100">3</button>
+                <button class="px-3 py-1 rounded border hover:bg-gray-100">Siguiente</button>
+            </nav>
+        </div>
+    </div>
+
+    <div id="modalContainerCrear"></div>
+    <!-- Scripts -->
+    <script src="../../src/components/modal_create_user/m_create_user.js"></script>
+</body>
+
+</html>

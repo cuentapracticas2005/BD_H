@@ -6,15 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="bg-gray-50 p-8">
-    <!--Barra de Navegación-->
-    <div>
-        <div id="barraNavDib" class="row"></div>
-    </div>
-    <div class="max-w-7x2 mx-auto">
 
+    <!--Barra de Navegación-->
+    <nav class="bg-white shadow-lg mb-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex space-x-7">
+                    <div class="flex items-center">
+                        <a href="../admin/interac_admin.html"><img src="../../public/img/HIDROSTAL3.png" alt="Logo"
+                                class="h-8 w-auto"></a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="./interac_admin.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Inicio</a>
+
+                        <div>
+                            <button class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600"
+                                onclick="document.getElementById('modalCreateUser').classList.remove('hidden')">
+                                Crear Nuevo Usuario
+                            </button>
+                        </div>
+                        <a href="../dashboard/admin_user.html"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Administración
+                            de Usuarios</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="../../public/index.html"
+                        class="px-4 py-2 rounded text-sm font-medium text-white bg-red-600 hover:bg-red-700">
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7x2 mx-auto">
         <div>
             <label class="block text-sm font-medium mb-1">SELECCIONE EL TIPO DE DOCUMENTO A BUSCAR: </label>
             <select name="tipo_documento" class="border rounded px-2 py-1 w-32" required>
@@ -121,6 +152,7 @@
                         <th class="px-4 py-2">Dibujado en</th>
                         <th class="px-4 py-2">Ver PDF</th>
                         <th class="px-4 py-2">Descargar PDF</th>
+                        <th class="px-4 py-2">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -139,6 +171,12 @@
                         <td class="border px-4 py-2 text-center">
                             <a href="docs/ejemplo1.pdf" download class="text-green-600 underline">Descargar</a>
                         </td>
+                        <td class="border px-4 py-2 text-center">
+                            <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
+                                onclick="document.getElementById('modalEliminar').classList.remove('hidden')">
+                                Eliminar
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td class="border px-4 py-2">2021</td>
@@ -155,6 +193,9 @@
                         <td class="border px-4 py-2 text-center">
                             <a href="docs/ejemplo2.pdf" download class="text-green-600 underline">Descargar</a>
                         </td>
+                        <td class="border px-4 py-2 text-center">
+                            <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700">Eliminar</button>
+                        </td>
                     </tr>
                     <!-- Puedes agregar más filas aquí -->
                 </tbody>
@@ -163,8 +204,10 @@
         <br>
         <!-- Insercion del modal -->
         <div id="modalContainer"></div>
-        <script src="../modals/modal_agregar_archivo/m_agregar_archivo.js"></script>
+        <div id="modalContainerEliminar"></div>
+        <div id="modalContainerCrear"></div>
+        <script src="../../src/components/modal_agregar_archivo/m_agregar_archivo.js"></script>
+        <script src="../../src/components/modal_eliminar_archivo/m_eliminar_archivo.js"></script>
+        <script src="../../src/components/modal_create_user/m_create_user.js"></script>
 
-        <!-- Barra de Navegación -->
-        <script src="./extraction/barra_nav.js"></script>
     </div>
