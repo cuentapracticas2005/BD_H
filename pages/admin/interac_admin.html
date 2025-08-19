@@ -153,6 +153,7 @@
                         <th class="px-4 py-2">Dibujado en</th>
                         <th class="px-4 py-2">Ver PDF</th>
                         <th class="px-4 py-2">Descargar PDF</th>
+                        <th class="px-4 py-2">Editar</th>
                         <th class="px-4 py-2">Eliminar</th>
                     </tr>
                 </thead>
@@ -171,6 +172,12 @@
                         </td>
                         <td class="border px-4 py-2 text-center">
                             <a href="docs/ejemplo1.pdf" download class="text-green-600 underline">Descargar</a>
+                        </td>
+                        <td class="border px-4 py-2 text-center">
+                            <button class="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700"
+                                onclick="document.getElementById('modalEditar').classList.remove('hidden')">
+                                Editar
+                            </button>
                         </td>
                         <td class="border px-4 py-2 text-center">
                             <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
@@ -195,7 +202,16 @@
                             <a href="docs/ejemplo2.pdf" download class="text-green-600 underline">Descargar</a>
                         </td>
                         <td class="border px-4 py-2 text-center">
-                            <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700">Eliminar</button>
+                            <button class="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700"
+                                onclick="document.getElementById('modalEditar').classList.remove('hidden')">
+                                Editar
+                            </button>
+                        </td>
+                        <td class="border px-4 py-2 text-center">
+                            <button class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
+                                onclick="document.getElementById('modalEliminar').classList.remove('hidden')">
+                                Eliminar
+                            </button>
                         </td>
                     </tr>
                     <!-- Puedes agregar más filas aquí -->
@@ -207,8 +223,10 @@
         <div id="modalContainer"></div>
         <div id="modalContainerEliminar"></div>
         <div id="modalContainerCrear"></div>
+        <div id="modalContainerEditar"></div>
         <script src="../../src/components/modal_agregar_archivo/m_agregar_archivo.js"></script>
         <script src="../../src/components/modal_eliminar_archivo/m_eliminar_archivo.js"></script>
         <script src="../../src/components/modal_create_user/m_create_user.js"></script>
+        <script src="../../src/components/modal_editar_archivo/m_editar_archivo.js"></script>
 
     </div>
