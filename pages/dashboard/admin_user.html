@@ -22,7 +22,7 @@
                         <a href="../admin/interac_admin.html"
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Inicio</a>
 
-                        <a href="./admin_user.html"
+                        <a href="admin_user.html"
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600">Administración
                             de Usuarios</a>
 
@@ -32,7 +32,7 @@
                                 Crear Nuevo Usuario
                             </button>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -95,10 +95,10 @@
                         </td>
                         <td class="border px-4 py-2">
                             <div class="flex gap-2 justify-center">
-                                <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
-                                    Editar
+                                <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                                    onclick="document.getElementById('modalEditar').classList.remove('hidden')">
+                                    Editar Usuario
                                 </button>
-                            </div>
                         </td>
                     </tr>
                     <!-- Ejemplo de usuario inactivo -->
@@ -112,8 +112,9 @@
                         </td>
                         <td class="border px-4 py-2">
                             <div class="flex gap-2 justify-center">
-                                <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
-                                    Editar
+                                <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                                    onclick="document.getElementById('modalEditar').classList.remove('hidden')">
+                                    Editar Usuario
                                 </button>
                             </div>
                         </td>
@@ -135,8 +136,10 @@
     </div>
 
     <div id="modalContainerCrear"></div>
+    <div id="modalContainerEditar"></div>
     <!-- Scripts -->
     <script src="../../src/components/modal_create_user/m_create_user.js"></script>
+    <script src="../../src/components/modal_editar_user/m_editar_user.js"></script>
 </body>
 
 </html>
