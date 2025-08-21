@@ -1,6 +1,6 @@
 // Función para cargar el modal desde m_agregar_archivo.html y agregarlo al DOM
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('../../src/components/modal_agregar_archivo/m_agregar_archivo.html')
+    fetch('../../components/modal_agregar_archivo/m_agregar_archivo.html')
         .then(response => response.text())
         .then(html => {
             // Insertar el modal en el contenedor

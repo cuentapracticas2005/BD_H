@@ -1,6 +1,6 @@
 // Función para cargar el modal para aviso de si desea eliminar archivo
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('../../src/components/modal_eliminar_archivo/m_eliminar_archivo.html')
+    fetch('../../components/modal_eliminar_archivo/m_eliminar_archivo.html')
         .then(response => response.text())
         .then(html => {
             // Insertar el modal en el contenedor
