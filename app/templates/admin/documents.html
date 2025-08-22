@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block title %}Administrar Documentos{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold">Administración de Documentos</h1>
+  <a href="{{ url_for('main.dashboard') }}" class="px-3 py-2 bg-gray-200 rounded">Volver</a>
+</div>
+
+<form action="{{ url_for('admin.documents_create') }}" method="post" enctype="multipart/form-data" class="bg-white p-6 rounded shadow mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+  {{ csrf_token() }}
+  <div>
+    <label class="block text-sm font-medium mb-1">Año</label>
+    <select name="anio" class="border rounded px-2 py-1 w-full" required>
+      <option value="" disabled selected>Selecciona año</option>
+      {% for y in [2020,2021,2022,2023,2024,2025] %}
+      <option value="{{ y }}">{{ y }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Mes</label>
+    <select name="mes" class="border rounded px-2 py-1 w-full" required>
+      {% for m in ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'] %}
+      <option value="{{ m }}">{{ m }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Descripción</label>
+    <input type="text" name="descripcion" class="border rounded px-2 py-1 w-full" required>
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Número de Plano</label>
+    <input type="text" name="numero_plano" class="border rounded px-2 py-1 w-full" required>
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Tamaño</label>
+    <select name="tamano" class="border rounded px-2 py-1 w-full" required>
+      {% for s in ['A0','A1','A2','A3','A4'] %}
+      <option value="{{ s }}">{{ s }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Versión</label>
+    <input type="text" name="version" class="border rounded px-2 py-1 w-full" required>
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Nombre del Dibujante</label>
+    <input type="text" name="dibujante" class="border rounded px-2 py-1 w-full" required>
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Dibujado en</label>
+    <select name="dibujado_en" class="border rounded px-2 py-1 w-full" required>
+      <option value="AC">CAD</option>
+      <option value="SketchUp">Lapiz</option>
+    </select>
+  </div>
+  <div class="md:col-span-2">
+    <label class="block text-sm font-medium mb-1">Archivo PDF</label>
+    <input type="file" name="pdf" accept="application/pdf" class="border rounded px-2 py-1 w-full" required>
+  </div>
+  <div class="md:col-span-2 flex justify-end">
+    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Agregar</button>
+  </div>
+</form>
+
+<table class="min-w-full bg-white rounded shadow">
+  <thead>
+    <tr class="bg-gray-200 text-gray-700">
+      <th class="px-4 py-2">Año</th>
+      <th class="px-4 py-2">Mes</th>
+      <th class="px-4 py-2">Descripción</th>
+      <th class="px-4 py-2">N° Plano</th>
+      <th class="px-4 py-2">Tamaño</th>
+      <th class="px-4 py-2">Versión</th>
+      <th class="px-4 py-2">Dibujante</th>
+      <th class="px-4 py-2">Dibujado en</th>
+      <th class="px-4 py-2">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in documents %}
+    <tr>
+      <td class="border px-4 py-2">{{ d.year }}</td>
+      <td class="border px-4 py-2">{{ d.month }}</td>
+      <td class="border px-4 py-2">{{ d.description }}</td>
+      <td class="border px-4 py-2">{{ d.plan_number }}</td>
+      <td class="border px-4 py-2">{{ d.size }}</td>
+      <td class="border px-4 py-2">{{ d.version }}</td>
+      <td class="border px-4 py-2">{{ d.drafter }}</td>
+      <td class="border px-4 py-2">{{ d.drawn_in }}</td>
+      <td class="border px-4 py-2">
+        <details>
+          <summary class="cursor-pointer text-blue-600">Editar</summary>
+          <form action="{{ url_for('admin.documents_update', doc_id=d.id) }}" method="post" enctype="multipart/form-data" class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-3">
+            {{ csrf_token() }}
+            <input type="hidden" name="id" value="{{ d.id }}">
+            <input type="number" name="anio" value="{{ d.year }}" class="border rounded px-2 py-1">
+            <input type="text" name="mes" value="{{ d.month }}" class="border rounded px-2 py-1">
+            <input type="text" name="descripcion" value="{{ d.description }}" class="border rounded px-2 py-1">
+            <input type="text" name="numero_plano" value="{{ d.plan_number }}" class="border rounded px-2 py-1">
+            <input type="text" name="tamano" value="{{ d.size }}" class="border rounded px-2 py-1">
+            <input type="text" name="version" value="{{ d.version }}" class="border rounded px-2 py-1">
+            <input type="text" name="dibujante" value="{{ d.drafter }}" class="border rounded px-2 py-1">
+            <input type="text" name="dibujado_en" value="{{ d.drawn_in }}" class="border rounded px-2 py-1">
+            <input type="file" name="pdf" accept="application/pdf" class="border rounded px-2 py-1 md:col-span-2">
+            <div class="md:col-span-2 flex gap-2">
+              <button class="bg-blue-600 text-white px-3 py-1 rounded">Guardar</button>
+            </div>
+          </form>
+        </details>
+        <form action="{{ url_for('admin.documents_delete', doc_id=d.id) }}" method="post" class="inline-block mt-2">
+          {{ csrf_token() }}
+          <button class="bg-red-600 text-white px-3 py-1 rounded" onclick="return confirm('¿Eliminar documento?')">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Crear Usuario{% endblock %}
+{% block content %}
+<h1 class="text-xl font-bold mb-4">Crear Usuario</h1>
+<form method="post" action="{{ url_for('auth.register_post') }}" class="bg-white p-6 rounded shadow max-w-lg">
+  {{ form.csrf_token }}
+  <div class="mb-4">
+    <label class="block text-sm font-medium mb-1">Usuario</label>
+    {{ form.username(class_='border rounded px-3 py-2 w-full') }}
+  </div>
+  <div class="mb-4">
+    <label class="block text-sm font-medium mb-1">Contraseña</label>
+    {{ form.password(class_='border rounded px-3 py-2 w-full') }}
+  </div>
+  <div class="mb-4">
+    <label class="block text-sm font-medium mb-1">Rol</label>
+    {{ form.role(class_='border rounded px-3 py-2 w-full') }}
+    <p class="text-sm text-gray-500 mt-1">Valores válidos: admin, worker</p>
+  </div>
+  <div class="flex gap-2">
+    <button class="px-4 py-2 bg-blue-600 text-white rounded">Crear</button>
+    <a href="{{ url_for('main.dashboard') }}" class="px-4 py-2 bg-gray-200 rounded">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
