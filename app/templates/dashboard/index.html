@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold">Documentos</h1>
+  {% if current_user.is_admin %}
+  <a href="{{ url_for('admin.documents_list') }}" class="px-4 py-2 bg-green-600 text-white rounded">Administrar</a>
+  {% endif %}
+</div>
+<table class="min-w-full bg-white rounded shadow">
+  <thead>
+    <tr class="bg-gray-200 text-gray-700">
+      <th class="px-4 py-2">Año</th>
+      <th class="px-4 py-2">Mes</th>
+      <th class="px-4 py-2">Descripción</th>
+      <th class="px-4 py-2">N° Plano</th>
+      <th class="px-4 py-2">Tamaño</th>
+      <th class="px-4 py-2">Versión</th>
+      <th class="px-4 py-2">Dibujante</th>
+      <th class="px-4 py-2">Dibujado en</th>
+      <th class="px-4 py-2">Descargar</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in documents %}
+    <tr>
+      <td class="border px-4 py-2">{{ d.year }}</td>
+      <td class="border px-4 py-2">{{ d.month }}</td>
+      <td class="border px-4 py-2">{{ d.description }}</td>
+      <td class="border px-4 py-2">{{ d.plan_number }}</td>
+      <td class="border px-4 py-2">{{ d.size }}</td>
+      <td class="border px-4 py-2">{{ d.version }}</td>
+      <td class="border px-4 py-2">{{ d.drafter }}</td>
+      <td class="border px-4 py-2">{{ d.drawn_in }}</td>
+      <td class="border px-4 py-2 text-center">
+        <a href="{{ url_for('main.download_doc', doc_id=d.id) }}" class="text-green-600 underline">Descargar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
