@@ -2,6 +2,12 @@
 CREATE DATABASE IF NOT EXISTS `hidrostal` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `hidrostal`;
 
+-- Usuario de base de datos para la aplicación (opcional)
+-- Cambia la contraseña si deseas otra
+CREATE USER IF NOT EXISTS 'hidrostal_user'@'localhost' IDENTIFIED BY 'Hidro$2025!';
+GRANT ALL PRIVILEGES ON `hidrostal`.* TO 'hidrostal_user'@'localhost';
+FLUSH PRIVILEGES;
+
 -- Tabla usuarios
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -34,8 +40,10 @@ CREATE TABLE `documents` (
   CONSTRAINT `fk_documents_user` FOREIGN KEY (`created_by_id`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Usuario administrador por defecto
--- Hash generado con Werkzeug (pbkdf2:sha256) para 'Admin123!'
+-- Usuario administrador por defecto para entrar a la aplicación
+-- usuario: admin
+-- contraseña: Admin123!
+-- (password_hash corresponde a la contraseña indicada, en formato pbkdf2:sha256)
 INSERT INTO `users` (`username`, `password_hash`, `role`, `is_active`) VALUES (
   'admin',
   'pbkdf2:sha256:600000$LGAwJ9wbwBLW4UqC$5d9bb21d7cb3fd1a9b6de6a2d72e4318319905b0d3d81d692dc58ed4a5b6a68c',
