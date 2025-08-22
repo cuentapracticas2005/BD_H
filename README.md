@@ -1,118 +1,94 @@
-# Sistema de Gestión de Documentos Hidrostal
+# Sistema de Gestión de Documentos — Flask + MySQL (XAMPP)
 
-## Descripción
-Sistema web para la gestión, almacenamiento y control de documentos técnicos de Hidrostal. Permite administrar planos, documentos técnicos y usuarios del sistema con diferentes niveles de acceso.
+Aplicación Flask con Jinja2 para gestionar documentos técnicos con autenticación y control de acceso por roles (administrador y trabajador).
 
-## Características Principales
-- Sistema de autenticación de usuarios
-- Gestión de documentos técnicos
-- Panel de administración de usuarios
-- Historial de actividades
-- Visualización y descarga de documentos
-- Sistema de solicitud de acceso
+## Requisitos
+- Python 3.11+
+- XAMPP (MySQL en 127.0.0.1:3306)
 
-## Estructura del Proyecto
+## Instalación
+1) Crear entorno e instalar dependencias:
 ```
-BD_H/
-├── public/
-│   ├── img/
-│   ├── style/
-│   ├── index.html
-│   └── prueba.html
-├── pages/
-│   ├── admin/
-│   │   └── interac_admin.html
-│   └── dashboard/
-├── src/
-│   └── components/
-│       ├── modal_agregar_archivo/
-│       ├── modal_email/
-│       ├── modal_eliminar_archivo/
-│       └── modal_create_user/
-└── README.md
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-## Tecnologías Utilizadas
-- HTML5
-- JavaScript
-- Tailwind CSS
+2) Configurar variables (.env):
+- Copiar `.env.example` a `.env` y editar:
+```
+SECRET_KEY=una-clave-segura
+DATABASE_URL=mysql+pymysql://root:password@127.0.0.1:3306/hidrostal
+UPLOAD_FOLDER=instance/uploads
+```
+Ajusta usuario/contraseña/host/puerto según tu XAMPP.
 
-## Funcionalidades
+3) Crear base de datos y tablas en MySQL (XAMPP):
+- Abre phpMyAdmin o una consola MySQL y ejecuta el contenido de:
+`sql/schema.sql`
+Esto creará la base `hidrostal`, tablas `users` y `documents`, e insertará un usuario admin.
 
-### 1. Sistema de Autenticación
-- Login de usuarios
-- Solicitud de acceso para nuevos usuarios
+4) Inicializar app y confirmar conexión:
+```
+python - <<'PY'
+from app import create_app, db
+app=create_app()
+with app.app_context():
+    db.engine.connect()
+    print('Conexión MySQL OK')
+PY
+```
 
-### 2. Panel de Administración
-- Creación de nuevos usuarios
-- Gestión de permisos
-- Administración de documentos
-- Visualización de historial
+5) Ejecutar servidor:
+```
+python run.py
+```
+URL: `http://localhost:5000/login`
 
-### 3. Gestión de Documentos
-- Subida de nuevos documentos
-- Búsqueda avanzada con múltiples filtros
-- Visualización y descarga de archivos
-- Control de versiones
+Credenciales admin iniciales (del SQL):
+- usuario: `admin`
+- contraseña: `Admin123!`
 
-### 4. Características de los Documentos
-- Año
-- Mes
-- Descripción
-- Número de plano
-- Tamaño (A0-A4)
-- Versión
-- Dibujante
-- Software utilizado
+## Cómo funciona
+- Autenticación: Flask-Login, formularios WTForms, contraseñas con hashing de Werkzeug.
+- Roles: `admin` y `worker`.
+  - admin: crear/editar/eliminar documentos y crear usuarios.
+  - worker: ver y descargar documentos.
+- Seguridad: CSRF, validación de PDFs, `secure_filename`, límite de tamaño, cabeceras CSP/anti-clickjacking.
 
-## Modales del Sistema
-1. **Modal de Agregar Archivo**
-   - Subida de nuevos documentos
-   - Formulario con validación
+## Estructura
+```
+app/
+  __init__.py      # App factory, config, seguridad, blueprints
+  models.py        # Modelos SQLAlchemy: User, Document
+  auth.py          # Rutas de login/logout/registro (solo admin)
+  main.py          # Dashboard y descargas
+  admin.py         # CRUD de documentos (solo admin)
+  static/
+    img/           # Imágenes
+    style/style.css
+  templates/
+    base.html
+    auth/login.html
+    auth/register.html
+    dashboard/index.html
+    admin/documents.html
+instance/
+  app.db (si usas SQLite por defecto) y uploads (si se configura)
+run.py
+requirements.txt
+.env.example
+sql/schema.sql
+```
 
-2. **Modal de Email**
-   - Solicitud de acceso
-   - Formulario de contacto
+## Endpoints
+- Auth: GET/POST `/login`, POST `/logout`, GET/POST `/register` (admin)
+- Dashboard: GET `/`, GET `/docs/<id>/download`
+- Admin: GET `/admin/documents`, POST `/admin/documents`, POST `/admin/documents/<id>`, POST `/admin/documents/<id>/delete`
 
-3. **Modal de Eliminar**
-   - Confirmación de eliminación
-   - Prevención de eliminaciones accidentales
+## Migración y limpieza
+- Se eliminaron directorios y archivos legacy (`src/templates/public`, `docs`, `index.html`), y se migraron los estáticos a `app/static`.
 
-4. **Modal de Crear Usuario**
-   - Registro de nuevos usuarios
-   - Asignación de roles
-
-## Roles de Usuario
-1. **Administrador**
-   - Acceso total al sistema
-   - Gestión de usuarios
-   - Control de documentos
-
-2. **Personal de planta**
-   - Acceso limitado
-   - Visualización de documentos
-
-## Seguridad
-- Autenticación de usuarios
-- Control de acceso basado en roles
-- Validación de formularios
-- Protección contra accesos no autorizados
-
-## Instalación y Uso
-1. Clonar el repositorio
-2. Abrir index.html en un navegador web moderno
-3. Para desarrollo, asegurarse de tener instalado:
-   - Navegador web moderno
-   - Editor de código (recomendado: VS Code)
-   - Conexión a internet (para CDN de Tailwind y Alpine.js)
-
-## Contribución
-Para contribuir al proyecto:
-1. Fork del repositorio
-2. Crear una rama para nuevas características
-3. Realizar commits con mensajes descriptivos
-4. Push a la rama
-5. Crear un Pull Request
-
-## Estado del Proyecto
-En desarrollo activo
+## Personalización
+- Cambia el hash del admin en `sql/schema.sql` si deseas otra contraseña (usa Werkzeug para generar hash).
+- Cambia `DATABASE_URL` para entornos productivos (usuario dedicado y contraseña segura).
